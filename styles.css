@@ -1,59 +1,3 @@
-/* General Styling */
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #f0efe9;
-    color: #333;
-    padding: 20px;
-    background-image: url('images/soft-texture-background.jpg'); /* Add a subtle textured background */
-    background-size: cover;
-}
-
-#app {
-    max-width: 900px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-h1, h2 {
-    text-align: center;
-    color: #3e4e3f; /* Soft green color for titles */
-}
-
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-}
-
-h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-#category-sort {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-#category-sort select {
-    font-size: 1em;
-    padding: 5px 10px;
-    border-radius: 8px;
-    border: 1px solid #a3b09a;
-    background: #f0efe9;
-    color: #3e4e3f;
-}
-
-/* Items Grid */
-.items-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
 .item-card {
     background: #fffaf1;
     border: 2px solid #d4b483;
@@ -78,6 +22,12 @@ h2 {
     border: 2px solid #a3b09a;
 }
 
+.item-card .item-quantity {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #3e4e3f;
+}
+
 .item-card button {
     margin: 5px;
     padding: 5px 10px;
@@ -92,10 +42,3 @@ h2 {
 .item-card button:hover {
     background: #3e4e3f;
 }
-
-/* Table Styling */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background: #fff

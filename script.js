@@ -8,7 +8,7 @@ async function fetchCraftingItems() {
         const response = await fetch('craftingItems.json');
         const data = await response.json();
         craftableItems = data.items;
-        
+
         // Set up inventory dynamically based on the materials in the items
         craftableItems.forEach(item => {
             for (let material in item.materials) {
@@ -41,29 +41,30 @@ function populateItems(category = "all") {
             const label = document.createElement('div');
             label.textContent = item.name;
 
-            const quantity = document.createElement('input');
-            quantity.type = 'number';
-            quantity.min = '0';
-            quantity.value = '0';
-            quantity.id = `item-${item.name}`;
+            const quantityLabel = document.createElement('div');
+            quantityLabel.classList.add('item-quantity');
+            quantityLabel.id = `item-quantity-${item.name}`;
+            quantityLabel.textContent = '0';
 
             const incrementButton = document.createElement('button');
             incrementButton.textContent = '+';
             incrementButton.addEventListener('click', () => {
-                quantity.value = parseInt(quantity.value) + 1;
+                const currentQuantity = parseInt(quantityLabel.textContent);
+                quantityLabel.textContent = currentQuantity + 1;
             });
 
             const decrementButton = document.createElement('button');
             decrementButton.textContent = '-';
             decrementButton.addEventListener('click', () => {
-                if (parseInt(quantity.value) > 0) {
-                    quantity.value = parseInt(quantity.value) - 1;
+                const currentQuantity = parseInt(quantityLabel.textContent);
+                if (currentQuantity > 0) {
+                    quantityLabel.textContent = currentQuantity - 1;
                 }
             });
 
             itemCard.appendChild(image);
             itemCard.appendChild(label);
-            itemCard.appendChild(quantity);
+            itemCard.appendChild(quantityLabel);
             itemCard.appendChild(incrementButton);
             itemCard.appendChild(decrementButton);
             itemsList.appendChild(itemCard);
@@ -77,7 +78,7 @@ function calculateMaterials() {
 
     // Calculate total materials needed
     craftableItems.forEach(item => {
-        const quantity = parseInt(document.getElementById(`item-${item.name}`).value);
+        const quantity = parseInt(document.getElementById(`item-quantity-${item.name}`).textContent);
         if (quantity > 0) {
             for (let material in item.materials) {
                 if (!summary[material]) {
