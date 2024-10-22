@@ -19,7 +19,6 @@ async function fetchCraftingItems() {
         });
 
         populateItems();
-        populateInventory();
     } catch (error) {
         console.error('Error fetching crafting items:', error);
     }
@@ -72,33 +71,6 @@ function populateItems(category = "all") {
     });
 }
 
-// Populate inventory inputs dynamically
-function populateInventory() {
-    const inventoryList = document.getElementById('inventory-list');
-    inventoryList.innerHTML = '';
-
-    for (let material in inventory) {
-        const inventoryDiv = document.createElement('div');
-        
-        const label = document.createElement('label');
-        label.textContent = `${material}: `;
-
-        const input = document.createElement('input');
-        input.type = 'number';
-        input.min = '0';
-        input.value = inventory[material];
-        input.id = `inventory-${material}`;
-        input.addEventListener('input', (e) => {
-            inventory[material] = parseInt(e.target.value);
-            updateSummary();
-        });
-
-        inventoryDiv.appendChild(label);
-        inventoryDiv.appendChild(input);
-        inventoryList.appendChild(inventoryDiv);
-    }
-}
-
 // Calculate materials needed and update the summary table
 function calculateMaterials() {
     const summary = {};
@@ -119,7 +91,7 @@ function calculateMaterials() {
     updateSummary(summary);
 }
 
-// Update the summary table dynamically
+// Update the summary table dynamically with editable inventory input fields
 function updateSummary(summary = {}) {
     const summaryBody = document.getElementById('summary-body');
     summaryBody.innerHTML = '';
@@ -134,7 +106,15 @@ function updateSummary(summary = {}) {
         neededCell.textContent = summary[material];
 
         const inventoryCell = document.createElement('td');
-        inventoryCell.textContent = `${inventory[material] || 0}/${summary[material]}`;
+        const inventoryInput = document.createElement('input');
+        inventoryInput.type = 'number';
+        inventoryInput.min = '0';
+        inventoryInput.value = inventory[material];
+        inventoryInput.id = `inventory-${material}`;
+        inventoryInput.addEventListener('input', (e) => {
+            inventory[material] = parseInt(e.target.value);
+        });
+        inventoryCell.appendChild(inventoryInput);
 
         row.appendChild(materialCell);
         row.appendChild(neededCell);
