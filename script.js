@@ -51,6 +51,8 @@ function populateItems(category = "all") {
             incrementButton.addEventListener('click', () => {
                 const currentQuantity = parseInt(quantityLabel.textContent);
                 quantityLabel.textContent = currentQuantity + 1;
+                updateCraftingList(item.name, currentQuantity + 1);
+                calculateMaterials();
             });
 
             const decrementButton = document.createElement('button');
@@ -59,6 +61,8 @@ function populateItems(category = "all") {
                 const currentQuantity = parseInt(quantityLabel.textContent);
                 if (currentQuantity > 0) {
                     quantityLabel.textContent = currentQuantity - 1;
+                    updateCraftingList(item.name, currentQuantity - 1);
+                    calculateMaterials();
                 }
             });
 
@@ -70,6 +74,27 @@ function populateItems(category = "all") {
             itemsList.appendChild(itemCard);
         }
     });
+}
+
+// Update the crafting list display
+function updateCraftingList(itemName, quantity) {
+    const craftingList = document.getElementById('crafting-list');
+    let existingItem = document.querySelector(`#crafting-item-${itemName}`);
+
+    if (quantity === 0) {
+        if (existingItem) {
+            existingItem.remove();
+        }
+    } else {
+        if (existingItem) {
+            existingItem.textContent = `${itemName} x ${quantity}`;
+        } else {
+            const listItem = document.createElement('div');
+            listItem.id = `crafting-item-${itemName}`;
+            listItem.textContent = `${itemName} x ${quantity}`;
+            craftingList.appendChild(listItem);
+        }
+    }
 }
 
 // Calculate materials needed and update the summary table
@@ -125,7 +150,6 @@ function updateSummary(summary = {}) {
 }
 
 // Event listeners
-document.getElementById('calculate-btn').addEventListener('click', calculateMaterials);
 document.getElementById('category-filter').addEventListener('change', (e) => {
     populateItems(e.target.value);
 });
