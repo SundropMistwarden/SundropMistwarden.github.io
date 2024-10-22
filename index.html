@@ -1,3 +1,54 @@
-<HTML>
-<BODY>
-<H3>Hello World</H3></BODY></HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crafting Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <h1>Crafting Calculator</h1>
+
+        <!-- Category Sorting -->
+        <div id="category-sort">
+            <label for="category-filter">Filter by Category:</label>
+            <select id="category-filter">
+                <option value="all">All</option>
+                <option value="furniture">Furniture</option>
+                <option value="tools">Tools</option>
+                <option value="potions">Potions</option>
+            </select>
+        </div>
+
+        <!-- Item Selection -->
+        <div id="item-selection">
+            <h2>Select Items to Craft</h2>
+            <div id="items-list" class="items-grid"></div>
+            <button id="calculate-btn">Calculate Materials</button>
+        </div>
+
+        <!-- Inventory Input -->
+        <div id="inventory-input">
+            <h2>Inventory</h2>
+            <div id="inventory-list"></div>
+        </div>
+
+        <!-- Materials Summary -->
+        <div id="materials-summary">
+            <h2>Materials Needed</h2>
+            <table id="summary-table">
+                <thead>
+                    <tr>
+                        <th>Material</th>
+                        <th>Needed (yy)</th>
+                        <th>Inventory (xx)</th>
+                    </tr>
+                </thead>
+                <tbody id="summary-body"></tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
