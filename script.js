@@ -8,7 +8,7 @@ async function fetchCraftingItems() {
         const response = await fetch('craftingItems.json');
         const data = await response.json();
         craftableItems = data.items;
-
+        
         // Set up inventory dynamically based on the materials in the items
         craftableItems.forEach(item => {
             for (let material in item.materials) {
@@ -41,60 +41,36 @@ function populateItems(category = "all") {
             const label = document.createElement('div');
             label.textContent = item.name;
 
-            const quantityLabel = document.createElement('div');
-            quantityLabel.classList.add('item-quantity');
-            quantityLabel.id = `item-quantity-${item.name}`;
-            quantityLabel.textContent = '0';
+            const quantity = document.createElement('input');
+            quantity.type = 'number';
+            quantity.min = '0';
+            quantity.value = '0';
+            quantity.id = `item-${item.name}`;
 
             const incrementButton = document.createElement('button');
             incrementButton.textContent = '+';
             incrementButton.addEventListener('click', () => {
-                const currentQuantity = parseInt(quantityLabel.textContent);
-                quantityLabel.textContent = currentQuantity + 1;
-                updateCraftingList(item.name, currentQuantity + 1);
-                calculateMaterials();
+                quantity.value = parseInt(quantity.value) + 1;
             });
+			incrementButton.addEventListener('click', calculateMaterials);
 
             const decrementButton = document.createElement('button');
             decrementButton.textContent = '-';
             decrementButton.addEventListener('click', () => {
-                const currentQuantity = parseInt(quantityLabel.textContent);
-                if (currentQuantity > 0) {
-                    quantityLabel.textContent = currentQuantity - 1;
-                    updateCraftingList(item.name, currentQuantity - 1);
-                    calculateMaterials();
+                if (parseInt(quantity.value) > 0) {
+                    quantity.value = parseInt(quantity.value) - 1;
                 }
             });
+			decrementButton.addEventListener('click', calculateMaterials);
 
             itemCard.appendChild(image);
             itemCard.appendChild(label);
-            itemCard.appendChild(quantityLabel);
+            itemCard.appendChild(quantity);
             itemCard.appendChild(incrementButton);
             itemCard.appendChild(decrementButton);
             itemsList.appendChild(itemCard);
         }
     });
-}
-
-// Update the crafting list display
-function updateCraftingList(itemName, quantity) {
-    const craftingList = document.getElementById('crafting-list');
-    let existingItem = document.querySelector(`#crafting-item-${itemName}`);
-
-    if (quantity === 0) {
-        if (existingItem) {
-            existingItem.remove();
-        }
-    } else {
-        if (existingItem) {
-            existingItem.textContent = `${itemName} x ${quantity}`;
-        } else {
-            const listItem = document.createElement('div');
-            listItem.id = `crafting-item-${itemName}`;
-            listItem.textContent = `${itemName} x ${quantity}`;
-            craftingList.appendChild(listItem);
-        }
-    }
 }
 
 // Calculate materials needed and update the summary table
@@ -103,7 +79,7 @@ function calculateMaterials() {
 
     // Calculate total materials needed
     craftableItems.forEach(item => {
-        const quantity = parseInt(document.getElementById(`item-quantity-${item.name}`).textContent);
+        const quantity = parseInt(document.getElementById(`item-${item.name}`).value);
         if (quantity > 0) {
             for (let material in item.materials) {
                 if (!summary[material]) {
@@ -150,6 +126,7 @@ function updateSummary(summary = {}) {
 }
 
 // Event listeners
+document.getElementById('calculate-btn').addEventListener('click', calculateMaterials);
 document.getElementById('category-filter').addEventListener('change', (e) => {
     populateItems(e.target.value);
 });
