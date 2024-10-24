@@ -1,0 +1,44 @@
+.item-card {
+    background: #fffaf1;
+    border: 2px solid #d4b483;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.item-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    border: 2px solid #a3b09a;
+}
+
+.item-card .item-quantity {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #3e4e3f;
+}
+
+.item-card button {
+    margin: 5px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 8px;
+    background: #a3b09a;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.item-card button:hover {
+    background: #3e4e3f;
+}
