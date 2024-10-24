@@ -1,4 +1,65 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    font-family: 'Nunito', sans-serif;
+    background-color: #f0efe9;
+    color: #333;
+    padding: 20px;
+    background-image: url('images/soft-texture-background.jpg'); /* Add a subtle textured background */
+    background-size: cover;
+}
+
+#app {
+    max-width: 800px;
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #3e4e3f; /* Soft green color for titles */
+}
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+#category-sort {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#category-sort select {
+    font-size: 1em;
+    padding: 5px 10px;
+    border-radius: 8px;
+    border: 1px solid #a3b09a;
+    background: #f0efe9;
+    color: #3e4e3f;
+}
+/* Items Grid */
+.items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+@@ -31,40 +55,47 @@ h1, h2 {
+}
+
 .item-card {
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     background: #fffaf1;
     border: 2px solid #d4b483;
     border-radius: 16px;
@@ -7,7 +68,6 @@
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
-
 .item-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -20,12 +80,6 @@
     margin-bottom: 10px;
     border-radius: 12px;
     border: 2px solid #a3b09a;
-}
-
-.item-card .item-quantity {
-    font-size: 1.5em;
-    margin: 10px 0;
-    color: #3e4e3f;
 }
 
 .item-card button {
@@ -42,3 +96,22 @@
 .item-card button:hover {
     background: #3e4e3f;
 }
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+    background: #fff
