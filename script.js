@@ -34,10 +34,6 @@ function populateItems(category = "all") {
             const itemCard = document.createElement('div');
             itemCard.classList.add('item-card');
 
-            const image = document.createElement('img');
-            image.src = `images/${item.name}.png`; // Assumes images are named as the item (e.g., chair.png)
-            image.alt = item.name;
-
             const label = document.createElement('div');
             label.textContent = item.name;
 
@@ -126,7 +122,6 @@ function updateSummary(summary = {}) {
 }
 
 // Event listeners
-document.getElementById('calculate-btn').addEventListener('click', calculateMaterials);
 document.getElementById('category-filter').addEventListener('change', (e) => {
     populateItems(e.target.value);
 });
